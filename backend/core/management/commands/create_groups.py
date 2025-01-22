@@ -35,6 +35,12 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import Group
 
 class Command(BaseCommand):
+    
+    """
+    Custom management command to create default user groups.
+    Groups can later have permissions assigned through the admin panel.
+    """
+
     help = 'Create default user groups'
 
     def handle(self, *args, **kwargs):

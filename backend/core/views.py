@@ -163,8 +163,8 @@
 ### views.py ###
 from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Zone, Division, Lobby, Room, Bed
-from .serializers import ZoneSerializer, DivisionSerializer, LobbySerializer, RoomSerializer, BedSerializer
+from .models import Zone, Division, Lobby, Room, Bed, FoodToken, Feedback
+from .serializers import ZoneSerializer, DivisionSerializer, LobbySerializer, RoomSerializer, BedSerializer, FoodTokenSerializer, FeedbackSerializer
 from .models import CustomUser
 from .serializers import CustomUserSerializer
 
@@ -206,3 +206,19 @@ class BedViewSet(viewsets.ModelViewSet):
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+
+class FoodTokenViewSet(viewsets.ModelViewSet):
+    queryset = FoodToken.objects.all()
+    serializer_class = FoodTokenSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.groups.filter(name='Crew Controller').exists():
+            return FoodToken.objects.all()  # Crew Controller can see all tokens
+        elif user.groups.filter(name='Crew Member').exists():
+            return FoodToken.objects.filter(crew_name=user.username)  # Crew Members see their tokens only
+        return FoodToken.objects.none()  # No access for others
+    
+class FeedbackViewSet(viewsets.ModelViewSet):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer

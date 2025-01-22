@@ -265,3 +265,58 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+from django.db import models
+
+
+class FoodToken(models.Model):
+    crew_name = models.CharField(max_length=255)
+    meal_type = models.CharField(
+        max_length=50,
+        choices=[
+            ('Breakfast', 'Breakfast'),
+            ('Lunch', 'Lunch'),
+            ('Dinner', 'Dinner'),
+            ('Snacks', 'Snacks'),
+            ('Parcel', 'Parcel'),
+        ]
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ('Pending', 'Pending'),
+            ('Served', 'Served'),
+            ('Cancelled', 'Cancelled'),
+        ],
+        default='Pending',
+    )
+
+    class Meta:
+        permissions = [
+            ("view_own_foodtoken", "Can view own food tokens"),
+        ]  # Only include custom permissions here; default permissions are auto-generated.
+
+    def __str__(self):
+        return f"{self.crew_name}'s {self.meal_type} token ({self.status})"
+
+class Feedback(models.Model):
+    user_name = models.CharField(max_length=255)
+    feedback_type = models.CharField(
+        max_length=50,
+        choices=[
+            ('Food', 'Food'),
+            ('Bed', 'Bed'),
+            ('Staff', 'Staff'),
+            ('Other', 'Other'),
+        ]
+    )
+    comment = models.TextField()
+    rating = models.PositiveIntegerField()
+
+    class Meta:
+        permissions = [
+            ("view_own_feedback", "Can view own feedback"),
+        ]
+
+    def __str__(self):
+        return f"Feedback by {self.user_name} ({self.feedback_type})"

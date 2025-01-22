@@ -56,15 +56,20 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from core.views import ZoneViewSet, DivisionViewSet, LobbyViewSet, CustomUserViewSet
+from core.views import ZoneViewSet, DivisionViewSet, LobbyViewSet, CustomUserViewSet, FoodTokenViewSet, FeedbackViewSet, RoomViewSet, BedViewSet
 
 router = DefaultRouter()
 router.register('zones', ZoneViewSet)
 router.register('divisions', DivisionViewSet)
 router.register('lobbies', LobbyViewSet)
 router.register('users', CustomUserViewSet)
+router.register('food-tokens', FoodTokenViewSet)
+router.register('feedbacks', FeedbackViewSet)
+router.register('rooms', RoomViewSet)
+router.register('beds', BedViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+     path('api-auth/', include('rest_framework.urls')), 
 ]

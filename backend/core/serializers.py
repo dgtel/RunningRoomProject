@@ -50,7 +50,7 @@
 
 ### serializers.py ###
 from rest_framework import serializers
-from .models import Zone, Division, Lobby, Room, Bed, CustomUser
+from .models import Zone, Division, Lobby, Room, Bed, CustomUser, FoodToken, Feedback
 
 class ZoneSerializer(serializers.ModelSerializer):
     class Meta:
@@ -81,3 +81,14 @@ class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ('username', 'email', 'first_name', 'last_name', 'LobbyAssigned')
+
+class FoodTokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FoodToken
+        fields = '__all__'
+
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = '__all__'

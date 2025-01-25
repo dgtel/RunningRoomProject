@@ -258,7 +258,7 @@
 ### admin.py ###
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Zone, Division, Lobby, Room, Bed, CustomUser, FoodToken, Feedback
+from .models import Zone, Division, Lobby, Room, Bed, CustomUser, FoodToken, Feedback, RegistrationRequest
 
 # Admin for Zone
 @admin.register(Zone)
@@ -316,3 +316,11 @@ class CustomUserAdmin(UserAdmin):
         ('Assigned Lobby', {'fields': ('LobbyAssigned',)}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
+
+from django.contrib import admin
+
+@admin.register(RegistrationRequest)
+class RegistrationRequestAdmin(admin.ModelAdmin):
+    list_display = ['user', 'role', 'designation', 'is_approved', 'approved_by', 'created_at']
+    list_filter = ['role', 'is_approved']
+    search_fields = ['user__username', 'user__email']

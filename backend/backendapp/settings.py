@@ -47,10 +47,12 @@ INSTALLED_APPS = [
     
     # Project-specific apps
     'core',
+    'corsheaders', 
 ]
 
 # Middleware configuration
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,3 +149,14 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',  # Default authentication backend
     'guardian.backends.ObjectPermissionBackend',  # Object-level permissions backend
 )
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8081",  # Replace with Expo’s local URL
+# ]
+
+# CORS Configuration
+CORS_ALLOW_ALL_ORIGINS = False  # Change to True to allow all origins (not recommended in production)
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8081",  # Add your frontend URL here
+]
+CORS_ALLOW_CREDENTIALS = True  # If using cookies for authentication

@@ -260,6 +260,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Zone, Division, Lobby, Room, Bed, CustomUser, FoodToken, Feedback, RegistrationRequest
 
+from django.contrib.auth.models import Group
+
 # Admin for Zone
 @admin.register(Zone)
 class ZoneAdmin(admin.ModelAdmin):
@@ -324,3 +326,14 @@ class RegistrationRequestAdmin(admin.ModelAdmin):
     list_display = ['user', 'role', 'designation', 'is_approved', 'approved_by', 'created_at']
     list_filter = ['role', 'is_approved']
     search_fields = ['user__username', 'user__email']
+
+# Only allow Superusers to manage groups
+class GroupAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        return request.user.is_superuser  # ✅ Only admins can add groups
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser  # ✅ Only admins can delete groups
+
+admin.site.unregister(Group)  # Remove default behavior
+admin.site.register(Group, GroupAdmin)  # Apply restrictions

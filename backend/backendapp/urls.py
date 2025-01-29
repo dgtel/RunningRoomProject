@@ -30,6 +30,9 @@ from core.views import (
     FeedbackViewSet,
     RoomViewSet,
     BedViewSet,
+    LoginAPIView,
+    ProfileAPIView,
+    RegisterAPIView,
 )
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -58,4 +61,14 @@ urlpatterns = [
     
     # Browsable API authentication login/logout
     path('api-auth/', include('rest_framework.urls')),
+
+    path("api/login/", LoginAPIView.as_view(), name="custom_login"),
+    path("api/profile/", ProfileAPIView.as_view(), name="profile"),
+
+    path("api/register/", RegisterAPIView.as_view(), name="register"),
 ]
+
+
+# urlpatterns += [
+#     path("api/login/", LoginAPIView.as_view(), name="custom_login"),
+# ]

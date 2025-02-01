@@ -5,20 +5,20 @@ $outputFile = "merged_content.txt"
 $backendFiles = @(
     "backend\backendapp\urls.py",
     "backend\core\views.py",
-    "backend\core\models.py",
-    "backend\core\serializers.py"
+    "backend\core\models.py"
+    # "backend\core\serializers.py"
 )
 
 # Frontend files
 $frontendFiles = @(
-    "RunningRoomFrontend\app\index.tsx",
-    "RunningRoomFrontend\app\login.tsx",
-    "RunningRoomFrontend\app\admin-dashboard.tsx",
-    "RunningRoomFrontend\app\crew-dashboard.tsx",
-    "RunningRoomFrontend\app\crew-controller-dashboard.tsx",
-    "RunningRoomFrontend\app\care-taker-dashboard.tsx",
-    "RunningRoomFrontend\app\contractor-dashboard.tsx",
-    "RunningRoomFrontend\app\profile.tsx",
+    # "RunningRoomFrontend\app\index.tsx",
+    # "RunningRoomFrontend\app\login.tsx",
+    # "RunningRoomFrontend\app\admin-dashboard.tsx",
+    # "RunningRoomFrontend\app\crew-dashboard.tsx",
+    # "RunningRoomFrontend\app\crew-controller-dashboard.tsx",
+    # "RunningRoomFrontend\app\care-taker-dashboard.tsx",
+    # "RunningRoomFrontend\app\contractor-dashboard.tsx",
+    # "RunningRoomFrontend\app\profile.tsx",
     "RunningRoomFrontend\app\src\config\axiosConfig.ts"
 )
 
